@@ -7,8 +7,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { db } from './service';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, IconButton } from '@material-ui/core';
 import { AddProduto } from './novo-produto';
+import { Delete, Edit } from '@material-ui/icons';
+import { EditProduto } from './edit-produto';
+import { ExcluirProduto } from './delete-produto';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +51,7 @@ function ProdutosList() {
   return (    
     <React.Fragment>
       <List className={classes.root}>
-        { produtos.length == 0 && <CircularProgress/> }
+        { produtos.length === 0 && <CircularProgress/> }
         { produtos.map((produto, index) =>
           <ListItem key={index} alignItems="center" className={classes.Item} >
             <ListItemAvatar>
@@ -76,6 +79,8 @@ function ProdutosList() {
                 </React.Fragment>
               }
             />
+            <EditProduto prod={produto}/>
+            <ExcluirProduto  prod={produto}/>
           </ListItem>
         )}
         

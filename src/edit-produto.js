@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Fab from '@material-ui/core/Fab';
-import { Add, AddAPhoto } from '@material-ui/icons';
+import { Add, AddAPhoto, Edit } from '@material-ui/icons';
 import { TextField } from '@material-ui/core';
 import { db, imagesRef } from './service';
 import { AlertMessage } from './alert-message';
@@ -42,13 +42,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-function AddProduto() {
+function EditProduto({prod}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [produto, setProduto] = React.useState({});
-    
+    const [produto, setProduto] = React.useState(prod);
     const [image, setImage] = React.useState(produto.imagem);
-
     const [sucessoMensagem, setSucessoMensagem] = React.useState(null);
 
     const handleClickOpen = () => {
@@ -64,9 +62,9 @@ function AddProduto() {
     }
     const handleSalvar = () => {
         
-        db.collection('produtos').add(produto)
+        db.collection('produtos').doc(produto.id).set(produto)
             .then(value => {
-                setSucessoMensagem('Produto adicionado com sucesso');
+                setSucessoMensagem('Produto alterado com sucesso');
                 handleClose();
             }).catch(err => {
                 setSucessoMensagem(err)
@@ -89,9 +87,9 @@ function AddProduto() {
 
     return (
         <div>
-            <Fab color="primary" aria-label="add" className={classes.addButom} onClick={handleClickOpen}>
-                <Add />
-            </Fab>
+            <IconButton aria-label="delete"  onClick={handleClickOpen}>
+              <Edit/>
+            </IconButton>
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar className={classes.appBar}>
                     <Toolbar>
@@ -99,7 +97,7 @@ function AddProduto() {
                             <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>
-                            Novo Produto
+                            {produto.descricao}
                         </Typography>
                         <Button autoFocus color="inherit" onClick={handleSalvar}>
                             Salvar
@@ -126,9 +124,9 @@ function AddProduto() {
                         <TextField required
                             label="Descrição"
                             placeholder="Digite a descrição"
+                            value={produto.descricao && produto.descricao}
                             onChange={changeCampos('descricao')}
-                            fullWidth
-                            defaultValue="" />
+                            fullWidth />
                     </ListItem>
                     <Divider />
                     <ListItem button>
@@ -136,9 +134,8 @@ function AddProduto() {
                             label="Preço"
                             placeholder="Digite a preço"
                             onChange={changeCampos('preco')}
-                            fullWidth
-                            
-                            defaultValue="" />
+                            value={produto.preco && produto.preco}
+                            fullWidth/>
                     </ListItem>
                     <Divider />
                     <ListItem button>
@@ -146,19 +143,19 @@ function AddProduto() {
                             label="Saldo"
                             placeholder="Digite a saldo"
                             onChange={changeCampos('saldo')}
-                            fullWidth
-                            defaultValue="" />
+                            value={produto.saldo && produto.saldo}
+                            fullWidth />
                     </ListItem>
                     <Divider />
                     <ListItem button>
-                        <TextField required
+                    <TextField required
                             label="Observação"
                             placeholder="Digite a Observação"
                             onChange={changeCampos('observacao')}
+                            value={ produto.observacao && produto.observacao}
                             multiline
                             rows={4}
-                            fullWidth
-                            defaultValue="" />
+                      fullWidth/>  
                     </ListItem>
                     <Divider/>
                 </List>
@@ -173,4 +170,4 @@ function AddProduto() {
             );
         }
         
-export {AddProduto}
+export { EditProduto }
