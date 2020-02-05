@@ -15,6 +15,7 @@ const config = {
     measurementId: "G-HYMPQENEZH"
 };
 
+
 const firebaseApp = firebase.initializeApp(config);
 const auth =  firebaseApp.auth();
 const db =  firebaseApp.firestore();
