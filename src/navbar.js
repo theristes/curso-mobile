@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
-
+import { auth } from './service';
 
 const useStyles = makeStyles( theme => ({
         root: {
@@ -21,19 +21,14 @@ function NavBar({titulo}) {
     return  <React.Fragment>
                 <AppBar position="static" elevation={4}>
                     <Toolbar>
-                        <IconButton edge="start"
-                                    className={classes.menuButton}
-                                    color="inherit"
-                                    aria-label="menu">
-                            <Menu/>
-                        </IconButton>
                         <Typography variant="h6"
                             className={classes.title}>
                             {titulo}
                         </Typography>
                         <Button color="inherit">
                             Sair
-                        </Button>
+                        </Button> 
+                        
                     </Toolbar>
                 </AppBar>
             </React.Fragment>

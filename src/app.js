@@ -11,7 +11,7 @@ const theme = createMuiTheme({
 function App(){
     return <React.Fragment>
                 <ThemeProvider theme={theme}>
-                    <NavBar titulo="Lista de Produtos"/>
+                    <NavBar titulo="Curso Mobile"/>
                     <ProdutosList/>
                 </ThemeProvider>
             </React.Fragment>
