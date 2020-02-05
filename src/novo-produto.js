@@ -34,12 +34,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-// Descricao, ID, Imagem, Observacao, Preco, Saldo
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-
 
 
 function AddProduto() {
@@ -92,7 +90,8 @@ function AddProduto() {
             <Fab color="primary" aria-label="add" className={classes.addButom} onClick={handleClickOpen}>
                 <Add />
             </Fab>
-            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            <Dialog fullScreen open={open} onClose={handleClose} 
+            TransitionComponent={Transition} >
                 <AppBar className={classes.appBar}>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">

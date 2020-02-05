@@ -86,7 +86,7 @@ function EditProduto({prod}) {
     }
 
     return (
-        <div>
+        <React.Fragment>
             <IconButton aria-label="delete"  onClick={handleClickOpen}>
               <Edit/>
             </IconButton>
@@ -166,8 +166,6 @@ function EditProduto({prod}) {
                         }}
                         message={sucessoMensagem} />
             </Dialog>
-        </div>
-            );
-        }
+        </React.Fragment>)}
         
 export { EditProduto }

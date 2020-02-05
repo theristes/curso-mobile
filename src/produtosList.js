@@ -7,9 +7,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { db } from './service';
-import { CircularProgress, IconButton } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { AddProduto } from './novo-produto';
-import { Delete, Edit } from '@material-ui/icons';
 import { EditProduto } from './edit-produto';
 import { ExcluirProduto } from './delete-produto';
 
@@ -41,12 +40,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
 function ProdutosList() {
   const classes = useStyles();
   const [produtos, setProdutos] = React.useState([]);
-  db.collection('produtos').onSnapshot( value => {
-    setProdutos( value.docs.map( doc => { return {id:doc.id, ...doc.data()} }) );
-  });
+
+  React.useEffect(() => {
+    db.collection('produtos').onSnapshot( value => {
+      
+        setProdutos( value.docs.map( doc => { return {id:doc.id, ...doc.data()} }) );
+      });
+  },[]);
 
   return (    
     <React.Fragment>
@@ -86,7 +90,7 @@ function ProdutosList() {
         
       </List>
       <AddProduto/>
-    </React.Fragment>
+     </React.Fragment>
   );
 }
 export { ProdutosList }
