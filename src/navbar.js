@@ -1,7 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
-import { auth } from './service';
+import { AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles( theme => ({
         root: {
