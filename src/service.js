@@ -18,9 +18,13 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 const auth =  firebaseApp.auth();
+
 const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
 const imagesRef = id => storage.ref().child(id);
 
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-export { db, storage, auth, imagesRef }
+
+export { googleProvider, facebookProvider, db, storage, auth, imagesRef }
