@@ -1,3 +1,4 @@
+import React from 'react';
 import  firebase from  'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -15,9 +16,30 @@ const config = {
     measurementId: "G-HYMPQENEZH"
 };
 
-
 const firebaseApp = firebase.initializeApp(config);
 const auth =  firebaseApp.auth();
+const useAuth = () => {
+
+    const [state, setState] = React.useState(() => { 
+            const user = firebase.auth().currentUser; 
+            
+            return { iniciando: !user, user } 
+    });
+
+    const onChange = (user) => {
+        setState({iniciando: false, user});
+    }
+  
+    React.useEffect(() => {
+      const unsubscribe = firebase.auth().onAuthStateChanged(onChange)
+      return () => unsubscribe()
+    }, [])
+  
+    return state
+ }
+
+
+
 
 const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
@@ -27,4 +49,4 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 
-export { googleProvider, facebookProvider, db, storage, auth, imagesRef }
+export { googleProvider, facebookProvider, db, storage, auth, useAuth, imagesRef }

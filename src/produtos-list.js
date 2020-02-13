@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { db } from './service';
+import { db, auth } from './service';
 import { CircularProgress } from '@material-ui/core';
 import { AddProduto } from './novo-produto';
 import { EditProduto } from './edit-produto';
@@ -45,8 +45,8 @@ function ProdutosList() {
   const [produtos, setProdutos] = React.useState([]);
 
   React.useEffect(() => {
+    
     db.collection('produtos').onSnapshot( value => {
-      
         setProdutos( value.docs.map( doc => { return {id:doc.id, ...doc.data()} }) );
       });
   },[]);

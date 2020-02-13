@@ -1,7 +1,8 @@
  import React from 'react';
 import { Typography, makeStyles, TextField, Container, Button } from '@material-ui/core';
 import {auth, googleProvider, phoneProvider} from './service';
-
+import { NovoUsuario} from './novo-usuario';
+import { ConsumirApi } from './consumir-api';
 const loginWithGoogle = 'https://www.c-learning.net/storage/app/media/img/buttons/google-login-button.png';
 
 const useStyles = makeStyles(theme => ({
@@ -31,9 +32,8 @@ function Login() {
     const Entrar = () => {
         auth.signInWithEmailAndPassword(dadosLogin.login, dadosLogin.senha)
         .then( value => {
-            alert(`Seja bem vindo ${value.user.displayName}`);
         }).catch ( error => {
-            alert(`Erro ${error}`);
+            alert(`${error}`);
         })
     }
 
@@ -41,9 +41,8 @@ function Login() {
     const EntrarGoogle = () => {
         auth.signInWithPopup(googleProvider)
         .then( value => {
-            alert(`Seja bem vindo ${value.user.email}`);
         }).catch ( error => {
-            alert(`Erro ${error}`);
+            alert(`${error}`);
         })
     }
 
@@ -86,12 +85,11 @@ function Login() {
                         Esqueci a Senha
                     </Button>
 
-                    <Button color="primary" variant="outlined" className={classes.button}>
-                        Registrar
-                    </Button>
+                    <NovoUsuario/>
 
                     <img src={loginWithGoogle} onClick={EntrarGoogle} className={classes.imagemGoogle}/>
 
+                    <ConsumirApi/>
 
 
                 </Container>

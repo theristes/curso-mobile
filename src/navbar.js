@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, makeStyles, Avatar } from '@material-ui/core';
+import { auth } from './service';
 
 const useStyles = makeStyles( theme => ({
         root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles( theme => ({
 
 function NavBar({titulo}) {
     const classes = useStyles();
+
+    const Sair = () => {
+        auth.signOut();
+    }
     return  <React.Fragment>
                 <AppBar position="static" elevation={4}>
                     <Toolbar>
@@ -23,9 +28,20 @@ function NavBar({titulo}) {
                             className={classes.title}>
                             {titulo}
                         </Typography>
-                        <Button color="inherit">
+                        { auth.currentUser && 
+                            auth.currentUser.photoURL && 
+                            <Avatar style={{marginRight: 20}} 
+                                    src={auth.currentUser.photoURL} /> }
+                        { auth.currentUser &&  
+                         auth.currentUser.displayName &&
+                         <Typography variant="span">
+                             Olá, {auth.currentUser.displayName}
+                          </Typography> }
+
+                       { auth.currentUser && 
+                        <Button color="inherit" onClick={Sair} >
                             Sair
-                        </Button> 
+                        </Button>  }
                         
                     </Toolbar>
                 </AppBar>
