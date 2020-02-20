@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { db, auth } from './service';
+import { db } from './service';
 import { CircularProgress } from '@material-ui/core';
 import { AddProduto } from './novo-produto';
 import { EditProduto } from './edit-produto';

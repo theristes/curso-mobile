@@ -1,6 +1,6 @@
  import React from 'react';
 import { Typography, makeStyles, TextField, Container, Button } from '@material-ui/core';
-import {auth, googleProvider, phoneProvider} from './service';
+import {auth, googleProvider} from './service';
 import { NovoUsuario} from './novo-usuario';
 import { ConsumirApi } from './consumir-api';
 const loginWithGoogle = 'https://www.c-learning.net/storage/app/media/img/buttons/google-login-button.png';
@@ -87,7 +87,7 @@ function Login() {
 
                     <NovoUsuario/>
 
-                    <img src={loginWithGoogle} onClick={EntrarGoogle} className={classes.imagemGoogle}/>
+                    <img src={loginWithGoogle} onClick={EntrarGoogle} alt="google" className={classes.imagemGoogle}/>
 
                     <ConsumirApi/>
 

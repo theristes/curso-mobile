@@ -3,7 +3,7 @@ import { NavBar, } from './navbar';
 import { ProdutosList } from './produtos-list';
 import { Login } from './login-usuario';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { auth, useAuth } from './service';
+import { useAuth } from './service';
 import { CircularProgress } from '@material-ui/core';
 
 const theme = createMuiTheme({
